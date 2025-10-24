@@ -1,33 +1,26 @@
-version: '3.8'
-
 services:
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "8080:80"
+  php:
+    image: bilet-satin-alma-php
+    container_name: bilet-php
     volumes:
       - ./src:/var/www/html
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: bilet-nginx
+    ports:
+      - "8282:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx:/etc/nginx/conf.d:ro
     depends_on:
       - php
     networks:
       - app-network
 
-  php:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./src:/var/www/html
-      - ./src/uploads:/var/www/html/uploads
-      - ./src/static:/var/www/html/static
-    networks:
-      - app-network
-    environment:
-      - DB_PATH=/var/www/html/ticket.db
-      - UPLOADS_DIR=/var/www/html/uploads
-      - STATIC_DIR=/var/www/html/static
-
 networks:
   app-network:
     driver: bridge
+                   
