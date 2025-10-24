@@ -1,0 +1,825 @@
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .header p {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 20px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group input, .form-group select {
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            bottom: 18px;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .swap-cities {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .swap-cities:hover {
+            background: #5a6fd8;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .search-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+
+        .loading ion-icon {
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .results-header h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .filter-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e0e6ed;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .bus-card {
+            background: white;
+            border: 2px solid #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .bus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .bus-info {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1fr auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .bus-details h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bus-details p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .bus-features {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .feature-tag {
+            background: #e8f4fd;
+            color: #3498db;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .timing {
+            text-align: center;
+        }
+
+        .timing .route {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .timing .time {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .timing .duration {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .price {
+            text-align: center;
+        }
+
+        .price .amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #27ae60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .price .currency {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .seats-available {
+            text-align: center;
+            color: #e67e22;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .select-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .select-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        /* Seat Selection */
+        .seat-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .seat-layout {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .bus-front {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border-radius: 10px 10px 5px 5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .seat-row {
+            display: grid;
+            grid-template-columns: 1fr 0.5fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .seat {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: white;
+            position: relative;
+        }
+
+        .seat::before {
+            content: '🪑';
+            font-size: 0.6rem;
+            position: absolute;
+            opacity: 0.3;
+        }
+
+        .seat.available:hover {
+            background: #3498db;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .seat.selected {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .seat.booked {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+            cursor: not-allowed;
+        }
+
+        .seat-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-seat {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .booking-summary {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 8px 0;
+        }
+
+        .summary-item ion-icon {
+            margin-right: 8px;
+        }
+
+        .total {
+            border-top: 2px solid #e0e6ed;
+            padding-top: 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        .proceed-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .proceed-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .proceed-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+
+        .no-results ion-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #5a6c7d;
+        }
+
+        .no-results p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-section {
+                padding: 20px;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .filter-controls {
+                gap: 10px;
+            }
+
+            .bus-info {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .timing .route {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .seat-row {
+                grid-template-columns: 1fr 0.3fr 1fr;
+            }
+
+            .seat {
+                width: 35px;
+                height: 35px;
+                font-size: 0.7rem;
+            }
+
+            .seat-legend {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .search-section, .results-section, .seat-section {
+                padding: 15px;
+            }
+
+            .seat {
+                width: 30px;
+                height: 30px;
+                font-size: 0.6rem;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+
+
+   .trip-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .trip-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .trip-card {
+            display: flex;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .trip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, #009578, #00c9a7);
+        }
+
+        .company-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+            padding-right: 20px;
+            border-right: 1px solid #eee;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background-color: #f8f9fa;
+            padding: 5px;
+        }
+
+        .no-logo {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .company-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+
+        .trip-details {
+            flex: 1;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .trip-route {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .city {
+            font-size: 18px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .route-arrow {
+            margin: 0 12px;
+            color: #009578;
+            font-size: 18px;
+        }
+
+        .trip-time {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .time-separator {
+            margin: 0 8px;
+            color: #999;
+        }
+
+        .duration {
+            font-size: 12px;
+            color: #888;
+            margin-left: auto;
+            background-color: #f0f3f5;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .trip-price-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            width: 100px;
+        }
+
+        .trip-price {
+            font-weight: 700;
+            font-size: 22px;
+            color: #009578;
+            margin-bottom: 4px;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .trip-features {
+            display: flex;
+            margin-top: 10px;
+            gap: 8px;
+        }
+
+        .feature {
+            font-size: 12px;
+            background-color: #f0f7ff;
+            color: #0066cc;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .no-trips {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #666;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .trip-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .trip-card {
+                flex-direction: column;
+                padding: 16px;
+            }
+
+            .company-info {
+                flex-direction: row;
+                width: 100%;
+                padding-right: 0;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 12px;
+                margin-bottom: 12px;
+            }
+
+            .company-logo, .no-logo {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+
+            .company-name {
+                text-align: left;
+            }
+
+            .trip-details {
+                padding: 0;
+            }
+
+            .trip-price-container {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 12px;
+            }
+
+            .trip-badge {
+                position: static;
+                margin-left: auto;
+            }
+        }

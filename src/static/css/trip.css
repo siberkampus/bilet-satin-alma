@@ -1,0 +1,233 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 15px;
+}
+
+.bus-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 200px;
+    width: 100%;
+}
+
+.bus-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bus-header h2 {
+    color: #2d3748;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.bus-header p {
+    color: #718096;
+    font-size: 14px;
+    margin: 0;
+}
+
+.bus {
+    background: #d1cbcb;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px 20px;
+    margin: 0 auto 20px;
+    width: 25%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.bus::before {
+    content: 'SÜRÜCÜ';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4a5568;
+    color: white;
+    padding: 3px 12px;
+    border-radius: 15px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.bus.seat2-3 .seats .seat:nth-child(2),
+.bus.seat2-2 .seats .seat:nth-child(2) {
+    margin-right: 5%;
+}
+
+.bus.seat3-2 .seats .seat:nth-child(3) {
+    margin-right: 5%;
+}
+
+.seats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 6px;
+    gap: 3px;
+}
+
+.seats .seat {
+    display: flex;
+    flex: 0 0 13%;
+    padding: 2px;
+    position: relative;
+}
+
+.seats .seat label {
+    border-radius: 6px;
+    background: #4299e1;
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.seats .seat input[type="radio"] {
+    display: none !important;
+}
+
+.seats .seat input[type="radio"]:checked + label {
+    background: #48bb78;
+    box-shadow: 0 0 0 2px #48bb78;
+    transform: scale(1.05);
+}
+
+.seats .seat input[type="radio"]:checked + label::after {
+    content: '✓';
+    font-size: 10px;
+}
+
+.seats .seat input[type="radio"]:disabled + label {
+    background: #cbd5e0;
+    color: #718096;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #4a5568;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.legend-available {
+    background: #4299e1;
+}
+
+.legend-selected {
+    background: #48bb78;
+}
+
+.legend-occupied {
+    background: #cbd5e0;
+}
+
+.selected-seats-info {
+    text-align: center;
+    margin: 15px 0;
+    padding: 12px;
+    background: #f7fafc;
+    border-radius: 10px;
+    border: 1px dashed #e2e8f0;
+}
+
+.selected-seats-info h4 {
+    color: #2d3748;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.selected-seats-list {
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.btn-primary {
+    background: #48bb78;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: block;
+    margin: 0 auto;
+    width: 160px;
+}
+
+.btn-primary:hover {
+    background: #38a169;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Mobil için */
+@media (max-width: 480px) {
+    .bus-container {
+        padding: 15px;
+        max-width: 320px;
+    }
+    
+    .bus {
+        width: 90%;
+        padding: 15px 10px;
+    }
+    
+    .seats .seat label {
+        width: 20px;
+        height: 20px;
+        font-size: 8px;
+    }
+    
+    .btn-primary {
+        width: 140px;
+        padding: 8px 20px;
+    }
+}
